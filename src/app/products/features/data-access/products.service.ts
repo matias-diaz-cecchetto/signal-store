@@ -16,14 +16,5 @@ export class ProductService extends BaseHttpService {
   getProducts(): Observable<Product[]> {
     //return this.http.get('https://fakestoreapi.com/products');
     return this.http.get<any[]>(`${this.apiUrl}/products`);
-    /* this.http.get(`${this.apiUrl}/products`).subscribe({
-      next: (response: any) => {
-        return response;
-        //console.log(`Productos: ${response}`);
-      },
-      error: (error:any) => {
-        console.error('Error al obtener productos: '+ error);
-      }
-    }) */
   }
 }
