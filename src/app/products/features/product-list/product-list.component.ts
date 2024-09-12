@@ -1,5 +1,5 @@
-import { Component, inject, OnInit } from '@angular/core';
-import { ProductService } from '../data-access/products.service';
+import { Component, inject } from '@angular/core';
+//import { ProductService } from '../data-access/products.service';
 import { ProductsStateService } from '../data-access/products-state.service';
 import { ProductCardComponent } from '../../ui/product-card/product-card.component';
 
@@ -11,26 +11,16 @@ import { ProductCardComponent } from '../../ui/product-card/product-card.compone
   styles: ``,
   providers: [ProductsStateService]
 })
-export default class ProductListComponent implements OnInit {
+export default class ProductListComponent {
   //products: any;
   productsState =  inject(ProductsStateService)
-  constructor(
+  /* constructor(
     //private productService: ProductService,
     //private productsState: ProductsStateService
-  ) {}
+  ) {} */
 
-  ngOnInit(): void {
-    /* this.productService.getProducts().subscribe({
-      next: (response: any) => {
-        this.products = response;
-        console.log('Productos:', this.products); // Muestra los productos en la consola.
-      },
-      error: (error: any) => {
-        console.error('Error al obtener productos:', error);
-      },
-    }); */
-    console.log(this.productsState.state().products);
-
-
-  }
+    changePage() {
+      const page = this.productsState.state.page() + 1;
+      this.productsState.changePage$.next(page);
+    }
 }

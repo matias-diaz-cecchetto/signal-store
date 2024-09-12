@@ -1,5 +1,5 @@
-import { HttpClient } from '@angular/common/http';
-import { inject, Injectable } from '@angular/core';
+
+import { Injectable } from '@angular/core';
 import { BaseHttpService } from '../../../shared/data-access/base-http.service';
 import { Observable } from 'rxjs';
 import { Product } from '../../../shared/interfaces/product.interface';
@@ -12,9 +12,18 @@ export class ProductService extends BaseHttpService {
     private http: HttpClient
   ) {
   } */
+  limit = 5;
 
-  getProducts(): Observable<Product[]> {
+  getProducts(page: number): Observable<Product[]> {
     //return this.http.get('https://fakestoreapi.com/products');
-    return this.http.get<any[]>(`${this.apiUrl}/products`);
+    return this.http.get<Product[]>(`${this.apiUrl}/products`, {
+      params: {
+        limit: page * this.limit,
+      },
+    });
+  }
+
+  getProduct(id: string): Observable<Product> {
+    return this.http.get<Product>(`${this.apiUrl}/products/${id}`);
   }
 }
