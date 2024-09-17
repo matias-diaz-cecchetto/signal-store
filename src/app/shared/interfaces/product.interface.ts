@@ -10,3 +10,8 @@ export interface Product {
   };
   title: string;
 }
+
+export interface ProductItemCart {
+  product: Product,
+  quantity: number, // Para saber cuantos productos hay en el carrito de compras
+}
